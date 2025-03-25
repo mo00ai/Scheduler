@@ -71,11 +71,11 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
         queryBuilder.append("select * from schedule");
 
         if(updatedAt != null && writer != null) {
-            queryBuilder.append(" where updated_at = " + updatedAt + " and writer = "+ writer);
+            queryBuilder.append(" where updated_at like '" + updatedAt + "%' and writer = '"+ writer+"'");
         } else if (updatedAt != null && writer == null) {
-            queryBuilder.append(" where updated_at = " + updatedAt );
+            queryBuilder.append(" where updated_at like '" + updatedAt +"%'");
         } else if (updatedAt == null && writer != null) {
-            queryBuilder.append(" where writer = " + writer );
+            queryBuilder.append(" where writer = '" + writer+"'" );
         }
 
         System.out.println(queryBuilder.toString());
@@ -114,7 +114,7 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
                         rs.getString("todo"),
                         rs.getString("writer"),
                         rs.getInt("password"),
-                        rs.getDate("created_at").toLocalDate(), //getDate하면 자동으로 '0000-00-00' 처리돼서 출력됨
+                        rs.getDate("created_at").toLocalDate(),
                         rs.getDate("updated_at").toLocalDate()
                 );
             }

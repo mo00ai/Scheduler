@@ -5,6 +5,7 @@ import com.example.scheduler.dto.ScheduleResponseDto;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface SchedulerService {
