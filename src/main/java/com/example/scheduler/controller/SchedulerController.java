@@ -40,7 +40,11 @@ public class SchedulerController {
         return new ResponseEntity<>(schedulerService.findSchedule(id),HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> editSchedule(@RequestBody ScheduleRequestDto requestDto, @PathVariable Long id) {
 
+        return new ResponseEntity<>(schedulerService.editSchedule(id, requestDto) ,HttpStatus.OK);
+    }
 
 
 }

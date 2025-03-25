@@ -1,5 +1,6 @@
 package com.example.scheduler.repository;
 
+import com.example.scheduler.dto.ScheduleRequestDto;
 import com.example.scheduler.dto.ScheduleResponseDto;
 import com.example.scheduler.entity.Schedule;
 import com.mysql.cj.result.Row;
@@ -98,7 +99,18 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
 
     }
 
+    @Override
+    public int editSchedule(Long id, ScheduleRequestDto dto) {
 
+        Schedule schedule = findSchedule(id);
+
+        if(dto.getPassword() != schedule.getPassword()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "패스워드가 틀립니다.");
+        }
+
+
+        return jdbcTemplate.update("update schedule set todo = ? , writer = ? where id = ? and password = ?", dto.getTodo(), dto.getWriter(),id,dto.getPassword());
+    }
 
 
     private RowMapper<ScheduleResponseDto> scheduleDtoMapper() {

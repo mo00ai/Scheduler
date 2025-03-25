@@ -8,16 +8,15 @@ create table schedule (
   writer varchar(20) not null,
   password int not null,
   created_at timestamp default current_timestamp,
-  updated_at timestamp default current_timestamp
+  updated_at timestamp default current_timestamp on update current_timestamp
 );
 
 SET explicit_defaults_for_timestamp=0;
 
 #나중에 실행할 거
-insert into schedule(id,todo,writer,password) values (null,'러닝','김철수',1234);
+insert into schedule(id,todo,writer,password) values (null,'바보','조아현',1234);
 
 select * from schedule;
-select * from schedule where writer = 조아현
 
 
 select * from schedule;

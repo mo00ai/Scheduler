@@ -1,5 +1,6 @@
 package com.example.scheduler.repository;
 
+import com.example.scheduler.dto.ScheduleRequestDto;
 import com.example.scheduler.dto.ScheduleResponseDto;
 import com.example.scheduler.entity.Schedule;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,6 @@ public interface SchedulerRepository {
     List<ScheduleResponseDto> findAllSchedules(LocalDate updatedAt, String writer);
 
     Schedule findSchedule(Long id);
+
+    int editSchedule(Long id, ScheduleRequestDto dto);
 }
