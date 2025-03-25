@@ -5,6 +5,7 @@ import com.example.scheduler.dto.ScheduleRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -15,8 +16,8 @@ public class Schedule {
     private String todo;
     private String writer;
     private int password;
-    private Date created_at; //local datetype
-    private Date updated_at;
+    private LocalDate created_at; //local datetype
+    private LocalDate updated_at;
 
     public Schedule(ScheduleRequestDto dto) {
         this.todo = dto.getTodo();

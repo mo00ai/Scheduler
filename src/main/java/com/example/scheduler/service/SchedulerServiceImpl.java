@@ -7,6 +7,7 @@ import com.example.scheduler.repository.SchedulerRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public List<ScheduleResponseDto> findAllSchedules(Date updatedAt, String writer) {
-        return schedulerRepository.findAllSchedules(updatedAt, writer);
+    public List<ScheduleResponseDto> findAllSchedules(LocalDate updated_at, String writer) {
+        return schedulerRepository.findAllSchedules(updated_at, writer);
     }
 }

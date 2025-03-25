@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -64,19 +65,44 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
     }
 
     @Override
-    public List<ScheduleResponseDto> findAllSchedules(Date updatedAt, String writer) {
+    public List<ScheduleResponseDto> findAllSchedules(LocalDate updatedAt, String writer) {
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("select * from schedule");
 
-        List<Schedule> returnSchedules = jdbcTemplate.query("select * from schedule where updated_at = ? and writer = ?", scheduleMapper(), updatedAt, writer);
+        if(updatedAt != null && writer != null) {
+            queryBuilder.append(" where updated_at = " + updatedAt + " and writer = "+ writer);
+        } else if (updatedAt != null && writer == null) {
+            queryBuilder.append(" where updated_at = " + updatedAt );
+        } else if (updatedAt == null && writer != null) {
+            queryBuilder.append(" where writer = " + writer );
+        }
 
-        //jdbcTemplate queryForObject와 query의 차이점 알아내기
+        System.out.println(queryBuilder.toString());
 
 
+        List<ScheduleResponseDto> schedules = jdbcTemplate.query(queryBuilder.toString(), scheduleDtoMapper());
 
+        if(!schedules.isEmpty()) {
+            return schedules;
+        }
 
         return List.of();
+    }
+
+    private RowMapper<ScheduleResponseDto> scheduleDtoMapper() {
+        return new RowMapper<ScheduleResponseDto>() {
+            @Override
+            public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new ScheduleResponseDto(
+                        rs.getLong("id"),
+                        rs.getString("todo"),
+                        rs.getString("writer"),
+                        rs.getDate("created_at").toLocalDate(),
+                        rs.getDate("updated_at").toLocalDate()
+                );
+            }
+        };
     }
 
     private RowMapper<Schedule> scheduleMapper() {
@@ -88,8 +114,8 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
                         rs.getString("todo"),
                         rs.getString("writer"),
                         rs.getInt("password"),
-                        rs.getDate("created_at"), //getDate하면 자동으로 '0000-00-00' 처리돼서 출력됨
-                        rs.getDate("updated_at")
+                        rs.getDate("created_at").toLocalDate(), //getDate하면 자동으로 '0000-00-00' 처리돼서 출력됨
+                        rs.getDate("updated_at").toLocalDate()
                 );
             }
         };

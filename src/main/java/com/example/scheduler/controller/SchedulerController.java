@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class SchedulerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(@RequestParam(required = false) Date updated_at, @RequestParam(required = false) String writer) {
+    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(@RequestParam(required = false) LocalDate updated_at, @RequestParam(required = false) String writer) {
 
 
         return new ResponseEntity<>(schedulerService.findAllSchedules(updated_at, writer),HttpStatus.OK);

@@ -17,7 +17,7 @@ SET explicit_defaults_for_timestamp=0;
 insert into schedule(id,todo,writer,password) values (null,'러닝','김철수',1234);
 
 select * from schedule;
-
+select * from schedule where writer = 조아현
 
 
 select * from schedule;

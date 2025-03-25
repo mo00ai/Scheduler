@@ -5,6 +5,7 @@ import com.example.scheduler.entity.Schedule;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -13,5 +14,5 @@ public interface SchedulerRepository {
 
     ScheduleResponseDto addTodo(Schedule schedule);
 
-    List<ScheduleResponseDto> findAllSchedules(Date updatedAt, String writer);
+    List<ScheduleResponseDto> findAllSchedules(LocalDate updatedAt, String writer);
 }
