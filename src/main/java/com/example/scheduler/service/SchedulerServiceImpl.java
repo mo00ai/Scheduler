@@ -33,4 +33,9 @@ public class SchedulerServiceImpl implements SchedulerService {
     public List<ScheduleResponseDto> findAllSchedules(LocalDate updated_at, String writer) {
         return schedulerRepository.findAllSchedules(updated_at, writer);
     }
+
+    @Override
+    public ScheduleResponseDto findSchedule(Long id) {
+        return new ScheduleResponseDto(schedulerRepository.findSchedule(id));
+    }
 }

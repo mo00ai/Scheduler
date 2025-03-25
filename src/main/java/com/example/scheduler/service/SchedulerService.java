@@ -12,4 +12,6 @@ public interface SchedulerService {
     ScheduleResponseDto addTodo(ScheduleRequestDto dto);
 
     List<ScheduleResponseDto> findAllSchedules(LocalDate updatedAt, String writer);
+
+    ScheduleResponseDto findSchedule(Long id);
 }

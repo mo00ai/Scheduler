@@ -90,6 +90,17 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
         return List.of();
     }
 
+    @Override
+    public Schedule findSchedule(Long id) {
+        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleMapper(), id);
+
+        return result.stream().findAny().orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id가 존재하지 않습니다"));
+
+    }
+
+
+
+
     private RowMapper<ScheduleResponseDto> scheduleDtoMapper() {
         return new RowMapper<ScheduleResponseDto>() {
             @Override

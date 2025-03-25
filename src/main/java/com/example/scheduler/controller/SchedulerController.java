@@ -31,9 +31,15 @@ public class SchedulerController {
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(@RequestParam(required = false) LocalDate updated_at, @RequestParam(required = false) String writer) {
 
-
         return new ResponseEntity<>(schedulerService.findAllSchedules(updated_at, writer),HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> findSchedule(@PathVariable Long id) {
+
+        return new ResponseEntity<>(schedulerService.findSchedule(id),HttpStatus.OK);
+    }
+
 
 
 
