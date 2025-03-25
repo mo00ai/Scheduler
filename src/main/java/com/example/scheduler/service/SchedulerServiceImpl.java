@@ -44,6 +44,9 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         Schedule originalSchedule = schedulerRepository.findSchedule(id);
 
+        //dto 입력안해서 null 일 때, 수정 전 데이터를 default로 해주고싶음 이렇게 하지만
+        //애초에 dto 자체의 default 정해주고 싶으면 빈생성자 dto()의 this.parameter = 0; 의 값을 정해줌 
+        //데이터의 default는 db 테이블에서
         if(dto.getTodo() == null) {
             dto.setTodo(originalSchedule.getTodo());
         } else if(dto.getWriter() == null) {
@@ -65,5 +68,15 @@ public class SchedulerServiceImpl implements SchedulerService {
         Schedule editedSchedule = schedulerRepository.findSchedule(id);
 
         return new ScheduleResponseDto(editedSchedule);
+    }
+
+    @Override
+    public void deleteSchedule(Long id) {
+        int deletedRow = schedulerRepository.deleteSchedule(id);
+
+        if(deletedRow == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id가 존재하지 않습니다."+id);
+        }
+
     }
 }

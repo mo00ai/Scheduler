@@ -112,6 +112,11 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
         return jdbcTemplate.update("update schedule set todo = ? , writer = ? where id = ? and password = ?", dto.getTodo(), dto.getWriter(),id,dto.getPassword());
     }
 
+    @Override
+    public int deleteSchedule(Long id) {
+        return jdbcTemplate.update("delete from schedule where id = ?",id);
+    }
+
 
     private RowMapper<ScheduleResponseDto> scheduleDtoMapper() {
         return new RowMapper<ScheduleResponseDto>() {

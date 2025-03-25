@@ -21,4 +21,6 @@ public interface SchedulerRepository {
     Schedule findSchedule(Long id);
 
     int editSchedule(Long id, ScheduleRequestDto dto);
+
+    int deleteSchedule(Long id);
 }
