@@ -5,8 +5,8 @@
 <br>
 
 <h3>1️⃣프로젝트 소개</h3>
-Java와 JDBC를 기반으로 일정 정보를 생성, 조회, 수정, 삭제할 수 있는 콘솔 기반 일정 관리 백엔드 프로젝트입니다.  
-3 Layer Architecture를 기반으로 관심사를 명확히 분리하고, RESTful한 API 설계를 직접 구현해보며 백엔드 개발의 기본기를 다지기 위해 진행한 프로젝트입니다.
+Java와 JDBC를 기반으로 일정 정보를 생성, 조회, 수정, 삭제할 수 있는 일정 관리 백엔드 프로젝트입니다.  
+3 Layer Architecture를 기반으로 역할을 명확히 분리하고, RESTful한 API 설계를 직접 구현해보며 백엔드 개발의 기본기를 다지기 위해 진행한 프로젝트입니다.
 
 ---
 
@@ -22,7 +22,14 @@ Java와 JDBC를 기반으로 일정 정보를 생성, 조회, 수정, 삭제할 
 
 <h3>3️⃣프로그램 구조</h3>
 
--erd, 계층 구조 프로그램 첨부 예정
+- http api 명세서
+  ![image](https://github.com/user-attachments/assets/b4d229e8-9386-4a82-a4ac-cafa300fe5bf)
+
+- postman http api 명세서
+  https://documenter.getpostman.com/view/31225592/2sAYkKJxoi
+
+- erd
+  ![image](https://github.com/user-attachments/assets/d2b6d65d-a438-4448-b04a-b825eec5678d)
 
 ---
 
@@ -63,53 +70,14 @@ Java와 JDBC를 기반으로 일정 정보를 생성, 조회, 수정, 삭제할 
 <h3>브랜치 소개</h3>
 
 1. mandatory/lv1
-
-<img src="https://github.com/user-attachments/assets/0640b112-6f95-40fd-8989-eca4ccad0716" width="30%">
-
-- 메인 메뉴 출력
-
+- 일정 생성
+- 전체 일정 조회
+  - 수정일, 작성자명을 기준(RequestParam)으로 조회
 
 2. mandatory/lv2
-
-<img src="https://github.com/user-attachments/assets/d3a418cd-d31f-434b-9ca2-61b5d394b86b" width="30%">
-
-- 입력값 받기
-- 입력값에 따라 다른 결과 출력
-
-
-3. mandatory/lv3
-
-<img src="https://github.com/user-attachments/assets/e0e7ab4f-d856-4129-bc09-878ea836075e" width="30%">
-
-- Kiosk, MenuItem 클래스 추가
-  - Main : MenuItem 객체 생성 및 초기화, Kiosk 실행
-  - Kiosk : 키오스크 로직 실행
-  - MenuItem : 햄버거 메뉴 관리 (ex) 싸이버거, 불싸이버거
-
-
- 4. mandatory/lv4 && mandatory/lv5
-
-<img src="https://github.com/user-attachments/assets/633152a8-b0c5-424d-9edb-c13bae46047c" width="30%">
-
-- Menu 클래스 추가
-  - Menu : MenuItem을 관리함, (ex) 햄버거, 음료, 사이드
-- getter/setter 추가로 캡슐화
-
-1. challenge/lv1
-
-<img src="https://github.com/user-attachments/assets/b8b3a31a-3486-4464-aad1-79bcffbdcfe6" width="30%">
-
-- 패키지 분리 (cart, menu)
-- Cart 클래스 추가
-  - 장바구니 기능 구현
-
-2. challenge/lv2
-
-<img src="https://github.com/user-attachments/assets/b8b3a31a-3486-4464-aad1-79bcffbdcfe6" width="30%">
-
-- Discount 클래스 추가
-  - 할인 기능 구현
-
+- 선택한 일정 수정
+- 선택한 일정 삭제
+- 모두 입력한 비밀번호가 맞으면 수정/삭제 가능
 
 
 ---
