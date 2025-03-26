@@ -6,6 +6,7 @@ import com.example.scheduler.entity.Schedule;
 import com.example.scheduler.repository.SchedulerRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
 
+    @Transactional
     @Override
     public ScheduleResponseDto addTodo(ScheduleRequestDto dto) {
 
@@ -44,6 +46,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         return new ScheduleResponseDto(schedulerRepository.findSchedule(id));
     }
 
+    @Transactional
     @Override
     public ScheduleResponseDto editSchedule(Long id, ScheduleRequestDto dto) {
 
