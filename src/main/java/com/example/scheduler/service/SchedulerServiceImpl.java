@@ -24,6 +24,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public ScheduleResponseDto addTodo(ScheduleRequestDto dto) {
 
+        //필수값들 입력 안했는지 검사
+        if(dto.getWriter() == null || dto.getPassword() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"필수값인 작성자와 비밀번호를 반드시 입력해주세요.");
+        }
+
         Schedule schedule = new Schedule(dto);
 
         return schedulerRepository.addTodo(schedule);
@@ -66,7 +71,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public void deleteSchedule(Long id,int password) {
+    public void deleteSchedule(Long id,Integer password) {
         int deletedRow = schedulerRepository.deleteSchedule(id,password);
 
         if(deletedRow == 0) {

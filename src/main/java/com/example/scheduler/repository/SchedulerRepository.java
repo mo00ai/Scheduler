@@ -21,6 +21,6 @@ public interface SchedulerRepository {
 
     int editSchedule(Long id, ScheduleRequestDto dto);
 
-    int deleteSchedule(Long id, int password);
+    int deleteSchedule(Long id, Integer password);
 
 }

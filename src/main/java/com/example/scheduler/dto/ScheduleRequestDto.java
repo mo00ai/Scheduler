@@ -10,6 +10,6 @@ public class ScheduleRequestDto {
     private String todo;
     @Setter
     private String writer;
-    private int password;
+    private Integer password;
 
 }

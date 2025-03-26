@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 public class ScheduleDeleteRequestDto {
 
-    private int password;
+    private Integer password;
 
 }

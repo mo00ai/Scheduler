@@ -16,7 +16,7 @@ public class Schedule {
     private Long id;
     private String todo;
     private String writer;
-    private int password;
+    private Integer password;
     private LocalDate created_at; //local datetype
     private LocalDate updated_at;
 

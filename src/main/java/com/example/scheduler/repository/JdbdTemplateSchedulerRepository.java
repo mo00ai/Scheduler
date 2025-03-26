@@ -38,25 +38,18 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("schedule").usingGeneratedKeyColumns("id").usingColumns("todo","writer","password");
 
-        //jdbcinsert -> usingColumns ->> 사용하는 컬럼들을 명시해서 , 사용하지 않는 컬럼은 default값 넣어줌,!!!!!!!!
-        // created at, updated at 에 null이 들어가는 문제 해결!!
-
         Map<String,Object> parameters = new HashMap<>();
         parameters.put("todo",schedule.getTodo());
         parameters.put("writer",schedule.getWriter());
         parameters.put("password",schedule.getPassword());
 
-
-
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-
+        //queryForObject는 실무에서 잘 사용하지 않는다고 함..
         //Schedule returnSchedule = jdbcTemplate.queryForObject("select * from schedule where id = ?", scheduleMapper(),key);
 
         List<Schedule> schedules = jdbcTemplate.query("select * from schedule where id = ?", scheduleMapper(), key);
 
-        //jdbcTemplate queryForObject와 query의 차이점 알아내기
-        //query를 실무에서 더 많이 씀 -> 이유 찾아서 til 작성
 
         Schedule returnSchedule = schedules.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "id가 존재하지 않습니다."));
 
@@ -87,9 +80,9 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
 
         if(!schedules.isEmpty()) {
             return schedules;
+        } else  {
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "id가 존재하지 않습니다");
         }
-
-        return List.of();
     }
 
     @Override
@@ -114,7 +107,7 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
     }
 
     @Override
-    public int deleteSchedule(Long id,int password) {
+    public int deleteSchedule(Long id,Integer password) {
 
         Schedule schedule = findSchedule(id);
 

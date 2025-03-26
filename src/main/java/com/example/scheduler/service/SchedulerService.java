@@ -16,5 +16,5 @@ public interface SchedulerService {
 
     ScheduleResponseDto editSchedule(Long id, ScheduleRequestDto dto);
 
-    void deleteSchedule(Long id, int password);
+    void deleteSchedule(Long id, Integer password);
 }
