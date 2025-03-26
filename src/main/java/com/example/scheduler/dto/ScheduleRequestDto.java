@@ -12,5 +12,4 @@ public class ScheduleRequestDto {
     private String writer;
     private int password;
 
-
 }

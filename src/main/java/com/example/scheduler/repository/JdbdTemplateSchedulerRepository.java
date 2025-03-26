@@ -78,6 +78,8 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
             queryBuilder.append(" where writer = '" + writer+"'" );
         }
 
+        queryBuilder.append(" order by updated_at desc");
+
         System.out.println(queryBuilder.toString());
 
 
