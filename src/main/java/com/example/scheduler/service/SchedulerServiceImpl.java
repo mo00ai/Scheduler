@@ -54,11 +54,6 @@ public class SchedulerServiceImpl implements SchedulerService {
         }
 
 
-
-//        if(dto.getTodo() == null || dto.getWriter() == null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The title and contents are required values.");
-//        }
-
         int updatedRow = schedulerRepository.editSchedule(id, dto);
 
         if(updatedRow == 0) {
@@ -71,8 +66,8 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public void deleteSchedule(Long id) {
-        int deletedRow = schedulerRepository.deleteSchedule(id);
+    public void deleteSchedule(Long id,int password) {
+        int deletedRow = schedulerRepository.deleteSchedule(id,password);
 
         if(deletedRow == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id가 존재하지 않습니다."+id);

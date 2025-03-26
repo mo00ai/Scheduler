@@ -13,10 +13,4 @@ public class ScheduleRequestDto {
     private int password;
 
 
-
-//    public ScheduleRequestDto(String todo, String writer, int password) {
-//        this.todo = todo;
-//        this.writer = writer;
-//        this.password = password;
-//    }
 }

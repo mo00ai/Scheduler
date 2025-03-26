@@ -13,7 +13,6 @@ import java.util.List;
 
 public interface SchedulerRepository {
 
-
     ScheduleResponseDto addTodo(Schedule schedule);
 
     List<ScheduleResponseDto> findAllSchedules(LocalDate updatedAt, String writer);
@@ -22,5 +21,6 @@ public interface SchedulerRepository {
 
     int editSchedule(Long id, ScheduleRequestDto dto);
 
-    int deleteSchedule(Long id);
+    int deleteSchedule(Long id, int password);
+
 }

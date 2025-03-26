@@ -45,8 +45,7 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
         parameters.put("todo",schedule.getTodo());
         parameters.put("writer",schedule.getWriter());
         parameters.put("password",schedule.getPassword());
-//        parameters.put("created_at", LocalDateTime.now());
-//        parameters.put("updated_at", LocalDateTime.now());
+
 
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
@@ -113,7 +112,14 @@ public class JdbdTemplateSchedulerRepository implements SchedulerRepository{
     }
 
     @Override
-    public int deleteSchedule(Long id) {
+    public int deleteSchedule(Long id,int password) {
+
+        Schedule schedule = findSchedule(id);
+
+        if(password != schedule.getPassword()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"비밀번호를 잘못 입력하셨습니다.");
+        }
+
         return jdbcTemplate.update("delete from schedule where id = ?",id);
     }
 
